@@ -3,7 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArqConecta | Plataforma</title>
+    
+    <!-- Título SEO: Focado em palavras-chave e localização -->
+    <title>ArqConecta | Encontre Arquitetos em Recife, Olinda e Região Metropolitana</title>
+    
+    <!-- Metatags Essenciais -->
+    <meta name="description" content="A ArqConecta liga empresas e clientes aos melhores arquitetos e escritórios de arquitetura em Recife, Olinda e todo o estado de Pernambuco. Encontre profissionais qualificados para o seu projeto.">
+    <meta name="keywords" content="arquitetura, arquitetos recife, arquitetos olinda, escritório de arquitetura PE, contratar arquiteto pernambuco, projetos arquitetônicos, ArqConecta">
+    <meta name="author" content="ArqConecta">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook (Para partilha em redes sociais) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://arcos.base44.app/">
+    <meta property="og:title" content="ArqConecta | A sua conexão com a Arquitetura em Pernambuco">
+    <meta property="og:description" content="Encontre e contrate arquitetos de renome em Recife e Olinda. A plataforma líder para conexão entre profissionais e contratantes.">
+    <meta property="og:image" content="https://arcos.base44.app/assets/logo-seo.png"> <!-- Sugestão: adicione um logo real aqui -->
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="ArqConecta | Arquitetos em Recife e Olinda">
+    <meta property="twitter:description" content="A plataforma para quem busca serviços de arquitetura profissional em Pernambuco.">
+
+    <!-- JSON-LD / Dados Estruturados (Explica ao Google que isto é um serviço/diretório profissional) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ArqConecta",
+      "description": "Plataforma de conexão para arquitetos em Recife, Olinda e Pernambuco.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Recife",
+        "addressRegion": "PE",
+        "addressCountry": "BR"
+      },
+      "areaServed": ["Recife", "Olinda", "Jaboatão dos Guararapes", "Pernambuco"],
+      "keywords": "arquitetura, construção, design de interiores, arquitetos"
+    }
+    </script>
+
     <style>
         /* Remove margens e garante que o shell ocupe todo o ecrã */
         body, html {
@@ -23,50 +62,71 @@
             display: block;
         }
 
-        /* Opcional: Ecrã de carregamento simples */
+        /* Ecrã de carregamento */
         #loader {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-family: sans-serif;
-            color: #666;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            text-align: center;
             z-index: -1;
+        }
+
+        /* SEO Hidden Content: Isto ajuda os bots do Google a lerem a página sem atrapalhar o utilizador */
+        .seo-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
     </style>
 </head>
 <body>
 
-    <div id="loader">A carregar ArqConecta...</div>
+    <!-- Conteúdo Semântico para SEO (Invisível para o utilizador, visível para o Google) -->
+    <div class="seo-hidden">
+        <h1>ArqConecta - Plataforma de Arquitetura em Pernambuco</h1>
+        <p>Procurando por arquitetura em Recife ou Olinda? O ArqConecta é o lugar ideal para encontrar arquitetos talentosos, escritórios de arquitetura e profissionais de design de interiores em toda a região de PE.</p>
+        <p>Seja você um escritório procurando novos talentos ou uma empresa querendo contratar arquitetos, a nossa plataforma facilita o cadastro e a busca por portfólios qualificados em Recife.</p>
+        <ul>
+            <li>Arquitetos em Recife</li>
+            <li>Projetos em Olinda</li>
+            <li>Escritórios de Arquitetura em Pernambuco</li>
+            <li>Tags: Arquitetura, Urbanismo, Design, PE</li>
+        </ul>
+    </div>
+
+    <div id="loader">
+        <h2>ArqConecta</h2>
+        <p>A carregar os melhores profissionais de Pernambuco...</p>
+    </div>
 
     <!-- O src será definido dinamicamente pelo JavaScript abaixo -->
-    <iframe id="app-frame" title="ArqConecta" allow="geolocation; microphone; camera; clipboard-write;"></iframe>
+    <iframe id="app-frame" title="ArqConecta | Encontre Arquitetos em Pernambuco" allow="geolocation; microphone; camera; clipboard-write;"></iframe>
 
     <script>
         /**
-         * Este script lê a URL do shell (GitHub) e redireciona o iframe
-         * Exemplo: se acederes a SEU-LINK.github.io?p=/arquitetos/123
-         * O iframe vai carregar: https://arcos.base44.app/arquitetos/123
+         * Script para encapsulamento de rotas
          */
         (function() {
             const baseUrl = "https://arcos.base44.app";
             const iframe = document.getElementById('app-frame');
             
-            // Captura os parâmetros da URL (ex: ?p=/rota)
             const urlParams = new URLSearchParams(window.location.search);
-            const path = urlParams.get('p') || ""; // Pega o valor de 'p' ou fica vazio
+            const path = urlParams.get('p') || ""; 
 
-            // Constrói a URL final. Garante que não há barras duplas //
             let finalUrl = baseUrl;
             if (path) {
                 finalUrl += path.startsWith('/') ? path : '/' + path;
             }
 
-            // Define o destino do iframe
             iframe.src = finalUrl;
-
-            // Log para depuração (pode ser removido)
-            console.log("A carregar rota: " + finalUrl);
         })();
     </script>
 </body>
