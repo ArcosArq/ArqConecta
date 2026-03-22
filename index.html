@@ -3,23 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArqConecta</title>
+    <title>ArqConecta | Plataforma</title>
     <style>
-        /* Isso tira as bordas brancas e faz o app ocupar 100% da tela */
+        /* Remove margens e garante que o shell ocupe todo o ecrã */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
+            width: 100%;
             overflow: hidden;
+            background-color: #ffffff;
         }
+
+        /* Estilização do Iframe */
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+            display: block;
+        }
+
+        /* Opcional: Ecrã de carregamento simples */
+        #loader {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: sans-serif;
+            color: #666;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
-    <iframe src="https://arcos.base44.app" title="ArqConecta"></iframe>
+
+    <div id="loader">A carregar ArqConecta...</div>
+
+    <!-- O src será definido dinamicamente pelo JavaScript abaixo -->
+    <iframe id="app-frame" title="ArqConecta" allow="geolocation; microphone; camera; clipboard-write;"></iframe>
+
+    <script>
+        /**
+         * Este script lê a URL do shell (GitHub) e redireciona o iframe
+         * Exemplo: se acederes a SEU-LINK.github.io?p=/arquitetos/123
+         * O iframe vai carregar: https://arcos.base44.app/arquitetos/123
+         */
+        (function() {
+            const baseUrl = "https://arcos.base44.app";
+            const iframe = document.getElementById('app-frame');
+            
+            // Captura os parâmetros da URL (ex: ?p=/rota)
+            const urlParams = new URLSearchParams(window.location.search);
+            const path = urlParams.get('p') || ""; // Pega o valor de 'p' ou fica vazio
+
+            // Constrói a URL final. Garante que não há barras duplas //
+            let finalUrl = baseUrl;
+            if (path) {
+                finalUrl += path.startsWith('/') ? path : '/' + path;
+            }
+
+            // Define o destino do iframe
+            iframe.src = finalUrl;
+
+            // Log para depuração (pode ser removido)
+            console.log("A carregar rota: " + finalUrl);
+        })();
+    </script>
 </body>
 </html>
